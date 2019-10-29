@@ -1,0 +1,1 @@
+exploit táblába commentek száma az adott exploithoz

@@ -1,4 +1,4 @@
 import git 
 
-g = git.cmd.Git('/home/akos/bme/Bestsploit/Code/tmp')
+g = git.cmd.Git('~/bme/szakdolgozat/exploit-db/')
 g.pull()
