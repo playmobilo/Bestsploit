@@ -45,6 +45,16 @@ class Db():
 							print(exploit.file)	
 						else:
 							print('DESC NOT FOUND')
+				else:
+					file_path = f
+					file_title = self.set_description(file_name)
+					print(file_title)
+					if file_title is not None:
+						exploit = Exploit(file_name,file_title,file_path,0,0)
+						self.session.merge(exploit)
+						print(exploit.file)	
+					else:
+							print('DESC NOT FOUND')	
 			except:
 				print('NEM SZAM')
 		self.session.commit()
@@ -92,7 +102,7 @@ db.update()
 
 #db.delete()
 #db.create()
-#db.add()
+#db.add(0)
 
 print('done')
 

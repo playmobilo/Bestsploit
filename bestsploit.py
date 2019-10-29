@@ -64,7 +64,7 @@ for opt, arg in OPTS:
         COMMENT = arg
         OPERATION = 'COMMENT'
 
-    elif opt == '-g':
+    elif opt == '-gc':
         FILE_ID = arg
         OPERATION = 'GETCOMMENT'
 
@@ -81,18 +81,18 @@ if OPERATION == 'PHRASE':
     EXPLOIT = SESSIONOBJ.query(Exploit).filter(Exploit.desc.contains(PHRASE)).all()
 
     LISTA = []
-    LISTATMP = []
+    #LISTATMP = []
     if EXPLOIT is not []:
         for x in EXPLOIT:
             string = x.desc
             string = string.replace(PHRASE, termcolor.colored(PHRASE, 'magenta'))
             tmp = [x.id, string, x.positive, x.negative]
             LISTA.append(tmp)
-            LISTATMP.append(int(x.file.split(".")[0]))
+            #LISTATMP.append(int(x.file.split(".")[0]))
 
     
     print(tabulate(LISTA, headers=["Id", "Description", "(+)", "(-)"], tablefmt="fancy_grid"))
-    print(max(LISTATMP))
+    #print(max(LISTATMP))
 if OPERATION == 'UPLOAD':
 
     try:
@@ -111,17 +111,6 @@ if OPERATION == 'UPLOAD':
         print('Usage: bestsploit.py -u <FILENAME> -t <DESCRIPTION>')
 
 
-
-#TODO delete from production!!!
-if OPERATION == 'DELETE':
-
-    EXISTS = SESSIONOBJ.query(Exploit).filter_by(file=FILE_NAME).all()
-    print(EXISTS)
-    if EXISTS is not []:
-        SESSIONOBJ.delete(EXISTS[0])
-        SESSIONOBJ.commit()
-
-
 if OPERATION == 'COMMENT':
     try:
         EXISTS = SESSIONOBJ.query(Exploit).filter_by(id=FILE_ID).first()
@@ -133,6 +122,9 @@ if OPERATION == 'COMMENT':
             SESSIONOBJ.commit()
         else:
             print("There is no exploit with the id you gave!")
+    except TypeError:
+        print('Usage: bestsploit.py -i <ID> -c <COMMENT>')
+        print('Don\'t forget that ID must be an integer and the comment must be a string!')
     except:
         print('Usage: bestsploit.py -i <ID> -c <COMMENT>')
 
@@ -157,10 +149,13 @@ if OPERATION == 'GETCOMMENT':
         
         print(tabulate(LISTA, headers=["Id", "name"], tablefmt="fancy_grid"))
 
+    except TypeError:
+        print('Usage: bestsploit.py -gc <EXPLOIT_ID>')
+        print('Don\'t forget that ID must be an integer!')
 
     except:
         traceback.print_exc()
-        print('Usage: bestsploit.py -g <EXPLOIT_ID>')
+        print('Usage: bestsploit.py -gc <EXPLOIT_ID>')
 
 #if OPERATION == 'EVALUATION':
  #   try:
@@ -171,3 +166,4 @@ if OPERATION == 'GETCOMMENT':
 
 #MAC cím alapján biztosítom hogy ne adhasson több értékelést egy adott exploitra
 #fail to ban dos ellen
+#dátum alapján elmentem hogy mikor frissítettem utoljára és csak-int-é alakítani és működik.
