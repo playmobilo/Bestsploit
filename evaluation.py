@@ -5,12 +5,11 @@ class Evaluation(Base):
 	__tablename__ = 'evaluation'
 
 	id = Column(Integer,Sequence('evaluation_id_seq'), primary_key = True)
-	mac_address = Column(String, unique=True)
+	username = Column(String,unique=True)
 	exploit_id = Column(Integer, ForeignKey('exploit.id'))
-	def __init__(self, mac_address, exploit_id):
-		self.mac_address = mac_address
+	evaluation = Column(String)
+	def __init__(self, username, exploit_id, evaluation):
+		self.username = username
 		self.exploit_id = exploit_id
+		self.evaluation = evaluation
 
-	def __repr__(self):
-		json = str('['+self.id+', '+self.mac_address+']')
-		return json
