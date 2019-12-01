@@ -6,9 +6,9 @@ class ApiKeyToUser(Base):
 
 	id = Column(Integer,Sequence('apikeytouser_id_seq'), primary_key = True)
 	username = Column(String,unique=True)
-	apikey = Column(String,unique=True)
+	api_key = Column(String,unique=True)
 	
 
 	def __init__(self, username, apikey):
 		self.username = username
-		self.apikey = apikey
+		self.api_key = apikey

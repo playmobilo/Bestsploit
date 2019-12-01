@@ -1,0 +1,57 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+
+
+Table feedback {
+  id int [pk, increment]
+  api_key varchar [ref: > api_key_to_user.api_key]
+  comment varchar
+  exploit_id int [ref: > exploit.id]
+  evaluation varchar // inline relationship (many-to-one)
+}
+
+Table exploit {
+  id int [pk, increment]
+  file varchar
+  desc varchar
+  path varchar
+  positive int
+  negative int
+ }
+
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one
+
+//----------------------------------------------//
+
+//// -- LEVEL 2
+//// -- Adding column settings
+
+Table api_key_to_user {
+  id  int [pk]
+  username varchar [ref: > user.username]  
+  api_key varchar // default value
+}
+
+Table user {
+  id int [pk] // primary key
+  username varchar
+  password varchar
+  email varchar // add column note
+}
+
+//----------------------------------------------//
+
+//// -- Level 3 
+//// -- Enum, Indexes
+
+// Enum for 'products' table below
+
+// Indexes: You can define a single or multi-column index 
+
+  
+
+//dbdiagram.io

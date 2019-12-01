@@ -126,7 +126,7 @@ class Db():
 							NEW_KEY_TO_USER = ApiKeyToUser(username,api_key)
 							self.SESSIONOBJ.add(NEW_KEY_TO_USER)
 							self.SESSIONOBJ.commit()
-							print('New Api Key was created! Please place it in the bestsploit.py to the correct place.\nYour api key is:'+api_key)
+							print('Api Key was created! Please place it in the bestsploit.py to the correct place.\nYour api key is:'+api_key)
 						else:
 							print('New is created')
 						
